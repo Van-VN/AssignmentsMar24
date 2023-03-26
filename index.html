@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weekend Assignments Mar 24th</title>
+  </head>
+  <body>
+    <h1>Bài Tập Tuần 24/3/2023</h1>
+    <h2>Bài 1: Tìm giá trị lớn nhất của hàm số trong một khoảng cho trước.</h2>
+    <button onclick="maxInFunc()">Click to start</button>
+    <h2>
+      Bài 2: Tìm bộ ba số trong một mảng sao cho tổng của chúng bằng một giá trị
+      cho trước.
+    </h2>
+    <input
+      type="text"
+      style="width: 500px; height: 40px; margin-bottom: 10px"
+      oninput="find3Nums()"
+      id="combine3Nums"
+      placeholder="Nhập vào các giá trị trong mảng, cách nhau bởi dấu ','"
+    />
+    <input
+      type="number"
+      style="height: 40px; margin-bottom: 10px"
+      oninput="find3Nums()"
+      id="numToCombine"
+      placeholder="Nhập số tổng:"
+    />
+    <p style="display: inline-block">Bộ 3 số cần tìm là:</p>
+    <p style="display: inline-block" id="resultCombine3Nums"></p>
+    <!-- <button onclick="find3Nums()">Click to start</button> -->
+    <h2>
+      Bài 3: Tìm hai số trong một mảng sao cho tổng của chúng bằng một giá trị
+      cho trước và có khoảng cách nhỏ nhất.
+    </h2>
+    <input
+      type="text"
+      id="sum2Nums"
+      oninput="sumDistant()"
+      style="width: 500px; height: 40px; margin-bottom: 10px"
+      placeholder="Nhập các phần tử trong mảng, cách nhau bằng dấu ','..."
+    />
+    <input
+      type="text"
+      id="sum2NumsNum"
+      oninput="sumDistant()"
+      style="height: 40px; margin-bottom: 10px"
+      placeholder="Nhập số tổng cần tìm"
+    />
+    <br />
+    <div id="2numsResult"></div>
+    <!-- <button onclick="sumDistant()">Click to start</button> -->
+    <h2>Bài 4: Tìm phần tử duy nhất đầu tiên trong một mảng</h2>
+    <input
+      type="text"
+      id="uniqueArr"
+      oninput="uniqueArr()"
+      style="width: 500px; height: 40px; margin-bottom: 10px"
+      placeholder="Nhập các phần tử trong mảng 1, cách nhau bằng dấu ','..."
+    />
+    <br />
+    <p style="display: inline-block">
+      Phần tử duy nhất, đầu tiên trong mảng là:
+    </p>
+    <p style="display: inline-block" id="resultUnique"></p>
+    <h2>Bài 5: Cho 4 mảng số nguyên bất kỳ, tìm mảng có tổng lớn nhất</h2>
+    <input
+      type="text"
+      id="arr1"
+      style="width: 500px; height: 40px; margin-bottom: 10px"
+      oninput="arrayCompare()"
+      placeholder="Nhập các phần tử trong mảng 1, cách nhau bằng dấu ','..."
+    />
+    <br />
+    <input
+      type="text"
+      id="arr2"
+      style="width: 500px; height: 40px; margin-bottom: 10px"
+      oninput="arrayCompare()"
+      placeholder="Nhập các phần tử trong mảng 2, cách nhau bằng dấu ','..."
+    />
+    <br />
+    <input
+      type="text"
+      id="arr3"
+      style="width: 500px; height: 40px; margin-bottom: 10px"
+      oninput="arrayCompare()"
+      placeholder="Nhập các phần tử trong mảng 3, cách nhau bằng dấu ','..."
+    />
+    <br />
+    <input
+      type="text"
+      id="arr4"
+      style="width: 500px; height: 40px; margin-bottom: 10px"
+      oninput="arrayCompare()"
+      placeholder="Nhập các phần tử trong mảng 4, cách nhau bằng dấu ','..."
+    />
+    <br />
+    <p style="display: inline-block">Mảng có giá trị lớn nhất là:</p>
+    <p style="display: inline-block" id="result"></p>
+    <h2>Bài 6: Tìm phần tử lớn thứ k trong một mảng số nguyên</h2>
+    <input
+      type="text"
+      id="arrayK"
+      style="width: 500px; height: 40px; margin-bottom: 10px"
+      oninput="findKNum()"
+      placeholder="Nhập các phần tử trong mảng, cách nhau bằng dấu ','..."
+    />
+    <input
+      type="number"
+      id="arrayKNum"
+      style="height: 40px; margin-bottom: 10px"
+      oninput="findKNum()"
+      placeholder="Nhập vị trí K:"
+    />
+    <br />
+    <p style="display: inline-block">Phần tử lớn thứ</p>
+    <p style="display: inline-block; color: red" id="displayK"></p>
+    <p style="display: inline-block">ở Array:</p>
+    <p style="display: inline-block; color: red" id="displayArr"></p>
+    <p style="display: inline-block">là:</p>
+    <p style="display: inline-block; color: red" id="result1"></p>
+  </body>
+</html>
+<script>
+  // Bài 1
+
+  function findMaxValue(f, a, b) {
+    let max = f(a);
+    for (let x = a; x <= b; x++) {
+      let y = f(x);
+      if (y > max) {
+        max = y;
+      }
+    }
+    return max;
+  }
+
+  function maxInFunc() {
+    let f = (x) => x * x - 8 * x - 5;
+    let a = 5;
+    let b = 99;
+    let max = findMaxValue(f, a, b);
+    console.log(
+      `Giá trị lớn nhất của hàm số trong khoảng từ ${a} đến ${b} là: ${max}`
+    );
+  }
+
+  // Bài 2
+
+  function find3Nums() {
+    let arr = document.getElementById("combine3Nums").value;
+    arr = arr.split(",");
+    arr = arr.map(Number);
+    let num = +document.getElementById("numToCombine").value;
+    let logCheck = false;
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = i + 1; j < arr.length; j++) {
+        for (let k = j + 1; k < arr.length; k++) {
+          if (arr[i] + arr[j] + arr[k] === num) {
+            document.getElementById(
+              "resultCombine3Nums"
+            ).innerHTML = `${arr[i]}, ${arr[j]} và ${arr[k]}`;
+            logCheck = true;
+          }
+        }
+      }
+    }
+    if (!logCheck) {
+      document.getElementById(
+        "resultCombine3Nums"
+      ).innerHTML = `Giá trị ${num} không thể tạo thành từ 3 phần tử trong chuỗi ${arr}`;
+    }
+  }
+
+  // Bài 3
+
+  function sumDistant() {
+    let arr = document.getElementById("sum2Nums").value;
+    arr = arr.split(",");
+    arr = arr.map(Number);
+    let num = +document.getElementById("sum2NumsNum").value;
+    let distant = arr.length;
+    let finali;
+    let finalj;
+    let length = 0;
+    // console.log(arr, finali);
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = i + 1; j < arr.length; j++) {
+        if (arr[i] + arr[j] === num && Math.abs(i - j) < distant) {
+          distant = Math.abs(i - j);
+          finali = arr[i];
+          finalj = arr[j];
+        }
+      }
+    }
+    if (finali) {
+      document.getElementById(
+        "2numsResult"
+      ).innerHTML = `Trong Array cần tìm ${arr} với giá trị tổng ${num} <br> Hai số có tổng bằng ${num} với khoảng cách ngắn nhất là: <br> ${finali} và ${finalj} với khoảng cách ${distant}...`;
+    } else {
+      document.getElementById(
+        "2numsResult"
+      ).innerHTML = `Giá trị tổng ${num} không cộng được bằng 2 số trong Array ${arr}`;
+    }
+  }
+
+  // Bài 4
+
+  function uniqueArr() {
+    let arr = document.getElementById("uniqueArr").value;
+    arr = arr.split(",");
+    console.log(arr);
+    for (let i = 0; i < arr.length; i++) {
+      let counter = 0;
+      for (let j = 0; j < arr.length; j++) {
+        if (arr[j] == arr[i]) {
+          counter++;
+        } else {
+          console.log("a");
+        }
+      }
+      if (counter === 1) {
+        document.getElementById("resultUnique").innerHTML = arr[i];
+        break;
+      }
+    }
+  }
+
+  // Bài 5
+
+  function arrayCompare() {
+    let sum1 = 0;
+    let sum2 = 0;
+    let sum3 = 0;
+    let sum4 = 0;
+
+    let arr1 = document.getElementById("arr1").value;
+    arr1 = arr1.split(",");
+    arr1 = arr1.map(Number);
+    let arr2 = document.getElementById("arr2").value;
+    arr2 = arr2.split(",");
+    arr2 = arr2.map(Number);
+    let arr3 = document.getElementById("arr3").value;
+    arr3 = arr3.split(",");
+    arr3 = arr3.map(Number);
+    let arr4 = document.getElementById("arr4").value;
+    arr4 = arr4.split(",");
+    arr4 = arr4.map(Number);
+
+    for (let i = 0; i < arr1.length; i++) {
+      sum1 += arr1[i];
+    }
+    for (let i = 0; i < arr2.length; i++) {
+      sum2 += arr2[i];
+    }
+    for (let i = 0; i < arr3.length; i++) {
+      sum3 += arr3[i];
+    }
+    for (let i = 0; i < arr4.length; i++) {
+      sum4 += arr4[i];
+    }
+
+    if (sum1 > sum2 && sum1 > sum3 && sum1 > sum4) {
+      document.getElementById("result").innerHTML = "Array 1";
+    } else if (sum2 > sum1 && sum2 > sum3 && sum2 > sum4) {
+      document.getElementById("result").innerHTML = "Array 2";
+    } else if (sum3 > sum1 && sum3 > sum2 && sum3 > sum4) {
+      document.getElementById("result").innerHTML = "Array 3";
+    } else if (sum4 > sum1 && sum4 > sum2 && sum4 > sum3) {
+      document.getElementById("result").innerHTML = "Array 4";
+    } else {
+      document.getElementById("result").innerHTML =
+        "Có ít nhất 2 Array có tổng bằng nhau...";
+    }
+  }
+
+  //   Bài 6
+
+  function findKNum() {
+    let arr = document.getElementById("arrayK").value;
+    arr = arr.split(",");
+    arr = arr.map(Number);
+    let num = +document.getElementById("arrayKNum").value;
+    document.getElementById("displayK").innerHTML = num;
+    document.getElementById("displayArr").innerHTML = arr;
+    let arr1 = [...arr];
+    arr1.sort(function (a, b) {
+      return b - a;
+    });
+    if (num > arr.length) {
+      document.getElementById("result1").innerHTML =
+        "Giá trị K lớn hơn chiều dài Array đã tạo!!!";
+    } else {
+      document.getElementById("result1").innerHTML = arr1[num - 1];
+    }
+  }
+</script>
+
+<!-- 1. Tìm giá trị lớn nhất của hàm số trong một khoảng cho trước.
+2. Tìm bộ ba số trong một mảng sao cho tổng của chúng bằng một giá trị cho trước.
+3. Tìm hai số trong một mảng sao cho tổng của chúng bằng một giá trị cho trước và có khoảng cách nhỏ nhất.
+4. Tìm phần tử duy nhất đầu tiên trong một mảng
+5. Cho 4 mảng số nguyên bất kỳ, tìm mảng có tổng lớn nhất
+6. Tìm phần tử lớn thứ k trong một mảng số nguyên -->
